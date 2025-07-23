@@ -1,7 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -108,34 +105,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function NewsArticle() {
-  const params = useParams();
-  const router = useRouter();
-  const [article, setArticle] = useState(null);
-  
-  useEffect(() => {
-    if (params.id) {
-      const foundArticle = newsArticles.find(a => a.id === parseInt(params.id));
-      if (foundArticle) {
-        setArticle(foundArticle);
-      } else {
-        router.push('/news');
-      }
-    }
-  }, [params.id, router]);
-  
+export default function NewsArticle({ params }) {
+  const article = newsArticles.find(a => a.id === parseInt(params.id));
+
   if (!article) {
-    return (
-      <>
-        <Navbar />
-        <div className="pt-24 pb-16 min-h-screen">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-white">Loading article...</p>
-          </div>
-        </div>
-        <Footer />
-      </>
-    );
+    notFound();
   }
   
   return (
