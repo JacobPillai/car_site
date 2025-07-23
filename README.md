@@ -1,6 +1,12 @@
 # Car Website
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-Visit%20Now-brightgreen)](https://jacobpillai.github.io/car_site/)
+
 A modern car listing website built with Next.js and Tailwind CSS.
+
+## Live Demo
+
+Check out the live demo: [Car Site](https://jacobpillai.github.io/car_site/)
 
 ## Features
 
@@ -517,6 +523,94 @@ Based on best practices for React Context usage, consider these refinements for 
    - Create a settings API for programmatic access from other features
 
 These recommendations are prioritized based on impact and implementation complexity, with performance optimizations and state management improvements offering the most significant benefits for minimal effort.
+
+## Recent Bug Fixes and Improvements
+
+### Dependencies Installation
+
+We resolved several dependency-related issues that were preventing the application from compiling properly:
+
+1. **Missing Heroicons Package**
+   - **Issue**: `Module not found: Can't resolve '@heroicons/react/24/outline'`
+   - **Solution**: Installed the Heroicons package using `npm install @heroicons/react/`
+   - **Components Fixed**: CarDetailsOverlay, Footer, Navbar, NotificationCenter, and several other components using icons
+
+2. **Missing Tailwind CSS**
+   - **Issue**: `Error: Cannot find module 'tailwindcss'`
+   - **Solution**: Installed Tailwind CSS and its dependencies using `npm install tailwindcss autoprefixer postcss`
+   - **Impact**: Fixed styling compilation across the entire application
+
+3. **GitHub Pages Deployment**
+   - **Issue**: Deprecated GitHub Actions artifact version (v3)
+   - **Solution**: Updated GitHub workflows to use v4 of the artifact actions
+   - **Result**: Successful deployment to GitHub Pages at [jacobpillai.github.io/car_site](https://jacobpillai.github.io/car_site/)
+
+All dependencies are now correctly installed and the application is compiling successfully.
+
+## Troubleshooting Common Issues
+
+### Dependency Resolution
+
+If you encounter module not found errors when starting the development server:
+
+1. **Icon Libraries**
+   ```bash
+   npm install @heroicons/react
+   ```
+   This package provides the SVG icons used throughout the application.
+
+2. **CSS Framework**
+   ```bash
+   npm install tailwindcss postcss autoprefixer
+   ```
+   These packages are essential for styling compilation.
+
+3. **Animation Library**
+   ```bash
+   npm install framer-motion
+   ```
+   Required for page transitions and UI animations.
+
+### Next.js Configuration
+
+The project uses Next.js 14 with the App Router. Ensure your configuration files are set up correctly:
+
+1. **tailwind.config.js** - Configures Tailwind CSS with content paths and theme settings
+2. **postcss.config.js** - Sets up PostCSS plugins for Tailwind and Autoprefixer
+3. **next.config.js** - Contains Next.js-specific configuration including image handling
+
+### CSS Issues
+
+If styling isn't appearing correctly:
+
+1. Verify that `app/globals.css` contains the Tailwind directives:
+   ```css
+   @tailwind base;
+   @tailwind components;
+   @tailwind utilities;
+   ```
+
+2. Check that the CSS file is imported in `app/layout.js`
+
+3. Run the following to clear the Next.js cache if styles aren't updating:
+   ```bash
+   rm -rf .next
+   npm run dev
+   ```
+
+### Git Repository Issues
+
+When pushing to GitHub, you may encounter line ending issues:
+
+```
+LF will be replaced by CRLF when git touches it next time.
+```
+
+This is due to differences between Windows and Unix line endings. Set Git to handle this automatically:
+
+```bash
+git config --global core.autocrlf true
+```
 
 ## Prerequisites
 
