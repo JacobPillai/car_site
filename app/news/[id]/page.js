@@ -101,6 +101,13 @@ const newsArticles = [
   }
 ];
 
+// This function is required for static site generation with dynamic routes
+export function generateStaticParams() {
+  return newsArticles.map((article) => ({
+    id: article.id.toString(),
+  }));
+}
+
 export default function NewsArticle() {
   const params = useParams();
   const router = useRouter();
